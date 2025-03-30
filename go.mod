@@ -1,3 +1,3 @@
 module github.com/stollenaar/aws-rotating-credentials-provider
 
-go 1.21.1
+go 1.24.1
