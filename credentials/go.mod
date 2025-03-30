@@ -5,13 +5,18 @@ go 1.24.1
 require (
 	github.com/aws/aws-sdk-go-v2 v1.36.3
 	github.com/spf13/viper v1.20.1
+	github.com/stretchr/testify v1.10.0
 )
 
 require (
 	github.com/aws/smithy-go v1.22.3 // indirect
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
+	github.com/go-viper/encoding v0.0.0-20250218145359-6a9547539a58 // indirect
+	github.com/go-viper/encoding/ini v0.1.1 // indirect
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.3 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/sagikazarmark/locafero v0.9.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spf13/afero v1.14.0 // indirect
@@ -21,5 +26,6 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
+	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/go-viper/encoding/ini"
 	"github.com/spf13/viper"
 )
 
@@ -57,11 +58,19 @@ func (s FilecredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, e
 		}, &FilecredentialsEmptyError{}
 	}
 
+	codecRegistry := viper.NewCodecRegistry()
+
+	codecRegistry.RegisterCodec("ini", ini.Codec{})
+	
+	v := viper.NewWithOptions(
+		viper.WithCodecRegistry(codecRegistry),
+	)
+
 	var creds DefaultCredentials
-	viper.SetConfigName(path.Base(s.FilePath))
-	viper.AddConfigPath(path.Dir(s.FilePath))
-	viper.SetConfigType("ini")
-	err := viper.ReadInConfig()
+	v.SetConfigName(path.Base(s.FilePath))
+	v.AddConfigPath(path.Dir(s.FilePath))
+	v.SetConfigType("ini")
+	err := v.ReadInConfig()
 	if err != nil {
 		fmt.Printf("error reading creds: %e\n", err)
 		return aws.Credentials{
@@ -69,7 +78,7 @@ func (s FilecredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, e
 		}, err
 	}
 
-	err = viper.Unmarshal(&creds)
+	err = v.Unmarshal(&creds)
 	if err != nil {
 		fmt.Printf("error unmarshalling creds: %e\n", err)
 		return aws.Credentials{
