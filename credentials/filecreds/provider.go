@@ -2,6 +2,7 @@ package filecreds
 
 import (
 	"context"
+	"fmt"
 	"path"
 	"time"
 
@@ -62,6 +63,7 @@ func (s FilecredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, e
 	viper.SetConfigType("ini")
 	err := viper.ReadInConfig()
 	if err != nil {
+		fmt.Printf("error reading creds: %e\n", err)
 		return aws.Credentials{
 			Source: FilecredentialsName,
 		}, err
@@ -69,6 +71,7 @@ func (s FilecredentialsProvider) Retrieve(_ context.Context) (aws.Credentials, e
 
 	err = viper.Unmarshal(&creds)
 	if err != nil {
+		fmt.Printf("error unmarshalling creds: %e\n", err)
 		return aws.Credentials{
 			Source: FilecredentialsName,
 		}, err
